@@ -11,6 +11,9 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <link href="css-login/style.css" rel="stylesheet">
     <!-- <link href="css/styles.css" rel="stylesheet" /> -->
+    <script src="assets/jquery-3.7.1.min.js"></script>
+    <script src="js/common.js"></script>
+    <script src="/js/register.js"></script>
 </head>
 
 <body class="h-100">
@@ -36,21 +39,19 @@
                     <div class="form-input-content">
                         <div class="card login-form mb-0">
                             <div class="card-body pt-5">
-                                
-                                    <a class="text-center" href="index.html"> <h4>註冊</h4></a>
-        
+                                <h4>註冊</h4>
                                 <form class="mt-5 mb-5 login-input">
                                     <div class="form-group">
-                                        <input type="text" class="form-control"  placeholder="Username" required>
+                                        <input id="user" type="text" class="form-control"  placeholder="Username" required>
                                     </div>
                                     <!-- <div class="form-group">
                                         <input type="email" class="form-control"  placeholder="Email" required>
                                     </div> -->
                                     <div class="form-group">
-                                        <input type="password" class="form-control" placeholder="Password" required>
+                                        <input id="psw" type="password" class="form-control" placeholder="Password" required>
                                     </div>
                                     <!-- <button class="btn login-form__btn submit w-100" href="leave-chatting.html">Sign in</button> -->
-                                    <input class="btn login-form__btn submit w-100" type="button" value="Sign In" onclick="location.href='login.html'">
+                                    <input id="btnCreate" class="btn login-form__btn submit w-100" type="button" value="建立帳號" >
                                 </form>
                                     <p class="mt-5 login-form__footer">Have account? <a href="login.html" class="text-primary">Login </a> now</p>
                                     </p>
