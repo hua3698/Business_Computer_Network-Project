@@ -1,6 +1,21 @@
 $(function() {
     let init = function () {
         check_login()
+
+        const queryString = window.location.search;
+    
+        if(queryString) {
+            let action = queryString.split('?')[1].split('=')[1];
+
+            switch (action) {
+                case 'fail':
+                    alert('系統錯誤，請重新輸入')
+                    break;
+
+                default:
+                    break;
+            }
+        }
     }
 
     let check_login = function () {
@@ -23,17 +38,14 @@ $(function() {
             data.title = title
             data.content = content
 
-            $.post('api/create_message.php', data, function(result){
-                console.log(result)
-                // if(result == 'success') {
-                //     setCookie('user', user, 1)
+            $.post('api/create_message.php', data, function(result) {
+                if(result == 'success') {
+                    location.href = 'chatting-board.html?action=create'
+                }
+                else {
+                    location.href = 'leave-chatting.html?action=fail'
 
-                //     location.href = 'chatting-board.html?action=success'
-                // }
-                // else {
-                //     location.href = 'login.html?action=fail'
-
-                // }
+                }
             });
         })
 

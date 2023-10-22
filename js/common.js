@@ -27,7 +27,7 @@ let getCookie = function(name) {
     let user_name = false
     document.cookie.split(';').forEach((val) => {
         let cookie = val.split('=')
-console.log(val)
+
         if(cookie[0].trim() == name) {
             user_name = cookie[1]
         }

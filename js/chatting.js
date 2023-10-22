@@ -1,4 +1,5 @@
 $(function() {
+
     let init = function () {
         const queryString = window.location.search;
     
@@ -8,6 +9,10 @@ $(function() {
             switch (action) {
                 case 'success':
                     alert('登入成功')
+                    break;
+
+                case 'create':
+                    alert('留言新增成功')
                     break;
 
                 default:
@@ -29,14 +34,16 @@ $(function() {
             let card = $('.post')
             $('#board').empty()
 
-            result.forEach(row => {
-                console.log(row)
+            result.forEach((row, idx) => {
                 let template = card.clone()
+
+                let img_url = 'https://picsum.photos/600/350?random=' + (idx+1)
                 
                 $(template).find('.card-title').html(row.title)
                 $(template).find('.card-text').html(row.content)
                 $(template).find('.card-owner').html(row.name)
                 $(template).find('.card-time').html(row.date)
+                $(template).find('.card-img-top').attr('src', img_url)
 
                 $('#board').append(template)
             });
