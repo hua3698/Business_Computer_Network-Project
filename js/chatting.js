@@ -11,6 +11,10 @@ $(function() {
                     alert('登入成功')
                     break;
 
+                case 'create':
+                    alert('留言新增成功')
+                    break;
+
                 default:
                     break;
             }
