@@ -25,6 +25,16 @@ $(function() {
     }
 
     let event = function () {
+
+        $('#psw').keypress(function (e) {
+            let key = e.which
+            if(key == 13)  // the enter key code
+             {
+               $('#btnSubmit').click();
+               return false;  
+             }
+        });   
+
         $('#btnSubmit').on('click', function() {
             let user = $('#user').val()
             let password = $('#psw').val()
