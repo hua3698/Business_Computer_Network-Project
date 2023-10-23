@@ -57,7 +57,7 @@ catch(Exception $e) {
 function message_add_like ($conn, $message_id, $count) {
 
 
-    $sql = 'insert into message_like (`message_id`, `like`) values (?, ?)';
+    $sql = 'INSERT INTO message_like (`message_id`, `like`) VALUES(?, ?) ON DUPLICATE KEY UPDATE `like` = `like`+1';
     
     $stmt = $conn->prepare($sql);
 

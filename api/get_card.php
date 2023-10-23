@@ -16,16 +16,23 @@ try
 
     
     if(isset($result[0])) {
-        $count = get_message_count($conn);
+        $message_count = get_message_count($conn);
 
         foreach ($result as $key => $row) {
-            foreach ($count as $c) {
+            $flag = false;
+            $count = 0;
+            foreach ($message_count as $c) {
                 if($row['id'] == $c['message_id']) {
-                    $result[$key]['count'] = $c['like'];
+                    $flag = true;
+                    $count = $c['like'];
                 }
-                else {
-                    $result[$key]['count'] = 0;
-                }
+            }
+
+            if($flag == true) {
+                $result[$key]['count'] = $count;
+            }
+            else {
+                $result[$key]['count'] = 0;
             }
         }
 

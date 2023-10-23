@@ -22,29 +22,29 @@ $(function() {
     }
 
     let event = function () {
-        // $('#board').on('click', '.like-button', function() {
-        //     let this_button = $(this)
-        //     let add_like = false
-        //     if($(this).find('i').hasClass('bi-balloon-heart')) {
-        //         add_like = true
-        //     }
+        $('#board').on('click', '.like-button', function() {
+            let this_button = $(this)
+            let add_like = false
+            if($(this).find('i').hasClass('fa-regular')) {
+                add_like = true
+                $(this).find('i').toggleClass('fa-solid').toggleClass('fa-regular')
+            }
 
-        //     let card_id = this_button.closest('.card').data('number')
+            let card_id = this_button.closest('.card').data('number')
 
-        //     let data = {}
-        //     data.card_id = card_id
-        //     data.add_like = add_like
-        //     data.user = getCookie('user')
+            let data = {}
+            data.card_id = card_id
+            data.add_like = add_like
+            data.user = getCookie('user')
 
-        //     $.post('api/like_message.php', data, function(data) {
+            $.post('api/like_message.php', data, function(data) {
 
-        //         let result = JSON.parse(data)
-        //         this_button.closest('.card').find('.like-count').html(result.count)
-        //     })
+                let result = JSON.parse(data)
+                this_button.closest('.card').find('.like-count').html(result.count)
+            })
 
-        //     $(this).find('i').toggleClass('bi-balloon-heart-fill').toggleClass('bi-balloon-heart')
 
-        // })
+        })
 
     }
 
@@ -69,6 +69,10 @@ $(function() {
                 $(template).find('.card-time').html(row.date)
                 $(template).find('.card-img-top').attr('src', img_url)
                 $(template).find('.like-count').html(row.count)
+
+                if(row.count > 0) {
+                    $(template).find('.like-button i').removeClass('fa-regular').addClass('fa-solid')
+                }
 
                 let news_ele = $(template).find('#news')
                 let today = new Date()
