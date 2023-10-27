@@ -7,7 +7,7 @@ date_default_timezone_set("Asia/Taipei");
 try
 {
     $dsn = "mysql:host=localhost;dbname=network;charset=utf8";
-    $conn = new PDO($dsn,'root','immgt');
+    $conn = new PDO($dsn,'root','immgt123');
     
     $sql = 'select * from board order by date desc';
     $stmt = $conn->prepare($sql);

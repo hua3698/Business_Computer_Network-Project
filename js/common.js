@@ -1,3 +1,20 @@
+$(function() {
+    
+    $('#logout').on('click', function (e) {
+        e.preventDefault()
+        eraseCookie('user')
+        alert('已登出')
+
+        location.href = 'index.html'
+
+
+    })
+
+    $('#logout a').on('click', function (e) {
+        e.preventDefault()
+    })
+})
+
 let control_nav = function() {
 
     let user = getCookie('user')

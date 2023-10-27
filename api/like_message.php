@@ -7,7 +7,7 @@ date_default_timezone_set("Asia/Taipei");
 try
 {
     $dsn = "mysql:host=localhost;dbname=network;charset=utf8";
-    $conn = new PDO($dsn,'root','immgt');
+    $conn = new PDO($dsn,'root','immgt123');
     
     $user = $_POST['user'];
     $message_id = $_POST['card_id'];
@@ -19,13 +19,17 @@ try
     {
         $count++;
 
-        message_add_like($conn, $message_id, $count);
-        // write_log($user, $message_id, $like);
+        $conn->beginTransaction();
 
+        message_add_like($conn, $message_id, $count);
+        write_log($conn, $user, $message_id, $count);
+
+        $result = $conn->commit();
         
         $response = new stdClass();
         $response->status = 'success';
         $response->count = $count;
+
 
         echo json_encode($response);
 
@@ -35,20 +39,6 @@ try
 
     }
     
-    
-    // $sql = 'select * from board order by date desc';
-
-    // $stmt = $conn->prepare($sql);
-    // $stmt->execute();
-    // $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-    // if(isset($result[0])) {
-    //     echo json_encode($result);
-    // }
-    // else {
-    //     echo '';
-    // }
-
 }
 catch(Exception $e) {
 
@@ -64,19 +54,23 @@ function message_add_like ($conn, $message_id, $count) {
     $stmt->bindParam(1, $message_id);
     $stmt->bindParam(2, $count);
     
-    $conn->beginTransaction();
     $stmt->execute();
-    $result = $conn->commit();
 
 }
 
-function write_log ($conn, $user, $message_id, $like) {
-    $sql = 'insert into message_like () values ()';
+function write_log ($conn, $user, $message_id, $count) {
+    $sql = 'insert into message_like_log (username, message_id, like_number, date) values (?, ?, ?, ?)';
     
     $stmt = $conn->prepare($sql);
-    $stmt->execute();
-    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+    $date = date('Y-m-d H:i:s');
+    
+    $stmt->bindParam(1, $user, PDO::PARAM_STR);
+    $stmt->bindParam(2, $message_id, PDO::PARAM_STR);
+    $stmt->bindParam(3, $count, PDO::PARAM_STR);
+    $stmt->bindParam(4, $date, PDO::PARAM_STR);
+
+    $stmt->execute();
 
 }
 

@@ -7,7 +7,7 @@ date_default_timezone_set("Asia/Taipei");
 try
 {
     $dsn = "mysql:host=localhost;dbname=network;charset=utf8";
-    $conn = new PDO($dsn,'root','immgt');
+    $conn = new PDO($dsn,'root','immgt123');
     
     $sql = 'insert into board (`username`, `name`, `title`, `content`, `date`) values (?, ?, ?, ?, ?)';
     $stmt = $conn->prepare($sql);
@@ -24,7 +24,7 @@ try
     $stmt->execute();
     $result = $conn->commit();
 
-    if(isset($result) && $result == true) {
+    if(isset($result)) {
         echo 'success';
     }
     else {
@@ -34,4 +34,5 @@ try
 }
 catch(Exception $e) {
     $conn->rollback();
+    echo 'cc';
 }

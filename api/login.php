@@ -7,7 +7,7 @@ date_default_timezone_set("Asia/Taipei");
 try
 {
     $dsn = "mysql:host=localhost;dbname=network;charset=utf8";
-    $conn = new PDO($dsn,'root','immgt');
+    $conn = new PDO($dsn,'root','immgt123');
     
     $sql = 'select * from user where username = :username and password = :password';
     $stmt = $conn->prepare($sql);

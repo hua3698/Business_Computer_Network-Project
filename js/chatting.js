@@ -1,28 +1,34 @@
 $(function() {
 
     let init = function () {
-        const queryString = window.location.search;
+        // const queryString = window.location.search;
     
-        if(queryString) {
-            let action = queryString.split('?')[1].split('=')[1];
+        // if(queryString) {
+        //     let action = queryString.split('?')[1].split('=')[1];
 
-            switch (action) {
-                case 'success':
-                    alert('登入成功')
-                    break;
+        //     switch (action) {
+        //         case 'success':
+        //             alert('登入成功')
+        //             break;
 
-                case 'create':
-                    alert('留言新增成功')
-                    break;
+        //         case 'create':
+        //             alert('留言新增成功')
+        //             break;
 
-                default:
-                    break;
-            }
-        }
+        //         default:
+        //             break;
+        //     }
+        // }
     }
 
     let event = function () {
         $('#board').on('click', '.like-button', function() {
+            let user = getCookie('user')
+            if(!user) {
+                alert('登入後才能散播歡樂散波愛')
+                return
+            }
+
             let this_button = $(this)
             let add_like = false
             if($(this).find('i').hasClass('fa-regular')) {
@@ -35,7 +41,7 @@ $(function() {
             let data = {}
             data.card_id = card_id
             data.add_like = add_like
-            data.user = getCookie('user')
+            data.user = user
 
             $.post('api/like_message.php', data, function(data) {
 
@@ -61,6 +67,9 @@ $(function() {
                 let template = card.clone()
 
                 let img_url = 'https://picsum.photos/600/350?random=' + (idx+1)
+
+                let mod = idx % 6;
+                let portrait_url = 'img/' + mod + '.png'
                 
                 $(template).find('.card').data('number', row.id)
                 $(template).find('.card-title').html(row.title)
@@ -69,6 +78,7 @@ $(function() {
                 $(template).find('.card-time').html(row.date)
                 $(template).find('.card-img-top').attr('src', img_url)
                 $(template).find('.like-count').html(row.count)
+                $(template).find('.card-footer img').attr('src', portrait_url)
 
                 if(row.count > 0) {
                     $(template).find('.like-button i').removeClass('fa-regular').addClass('fa-solid')
@@ -86,6 +96,7 @@ $(function() {
 
                 $('#board').append(template)
             });
+
         });
     }
 
