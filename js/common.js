@@ -1,3 +1,20 @@
+$(function() {
+    
+    $('#logout').on('click', function (e) {
+        e.preventDefault()
+        eraseCookie('user')
+        alert('已登出')
+
+        location.href = 'index.html'
+
+
+    })
+
+    $('#logout a').on('click', function (e) {
+        e.preventDefault()
+    })
+})
+
 let control_nav = function() {
 
     let user = getCookie('user')
@@ -27,7 +44,7 @@ let getCookie = function(name) {
     let user_name = false
     document.cookie.split(';').forEach((val) => {
         let cookie = val.split('=')
-console.log(val)
+
         if(cookie[0].trim() == name) {
             user_name = cookie[1]
         }
